@@ -22,7 +22,7 @@ resource "aws_vpc" "week20-vpc_block" {
   
 #Create 2 public Subnets
 resource "aws_subnet" "subnet-public1" {
-  vpc_id            = "aws_vpc.week20-vpc_block.id"
+  vpc_id            = "vpc-07df047a"
   cidr_block        = "10.0.1.0/24"
   availability_zone = "us-east-1a"
   
@@ -32,7 +32,7 @@ resource "aws_subnet" "subnet-public1" {
 }
 
 resource "aws_subnet" "subnet-public2" {
-  vpc_id            = "aws_vpc.week20-vpc_block.id"
+  vpc_id            = "vpc-07df047a"
   cidr_block        = "10.0.2.0/24"
   availability_zone = "us-east-1b"
   
@@ -75,13 +75,13 @@ resource "aws_lb" "week20-lb" {
 
 #EC2 Instance
 resource "aws_instance" "week20-instance1" {
-  ami           = data.aws_instance.ec2_instance_ami
-  subnet_id     = aws_subnet.subnet-public1
+  ami           = "ami-07bb0cb78c7bb6d2d"
+  subnet_id     = aws_subnet.subnet-public1.id
   instance_type = "t2.micro"
 }
 
 resource "aws_instance" "week20-instance2" {
-  ami           = data.aws_instance.ec2_instance_ami
-  subnet_id     = aws_subnet.subnet-public2
+  ami           = "ami-07bb0cb78c7bb6d2d"
+  subnet_id     = aws_subnet.subnet-public2.id
   instance_type = "t2.micro"
 }
