@@ -61,6 +61,18 @@ resource "aws_subnet" "subnet-private2" {
   }
 }
 
+resource "aws_db_instance" "default" {
+  allocated_storage    = 10
+  engine               = "mysql"
+  engine_version       = "5.7"
+  instance_class       = "db.t3.micro"
+  name                 = "week20rds"
+  username             = db_username
+  password             = db_password
+  parameter_group_name = "default.mysql5.7"
+  skip_final_snapshot  = true
+}
+
 #Load Balancer
 resource "aws_lb" "week20-lb" {
   load_balancer_type = "application"
